@@ -1,6 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 
+function filterByQuery(query, notes) {
+    let filterResults = notes;
+    if (query.title) {
+        filterResults = filterResults.filter(
+            (note) => note.title === query.title
+        );
+    }
+    return filterResults;
+}
+
 function createNewNote(body, notesArray) {
     const note = body;
     notesArray.push(note);
@@ -22,6 +32,7 @@ function validateNote(note) {
 }
 
 module.exports = {
+    filterByQuery,
     createNewNote,
     validateNote
 };
