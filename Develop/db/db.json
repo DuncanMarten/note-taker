@@ -1,14 +1,14 @@
 {
   "notes": [
     {
-      "title": "test1",
-      "text": "test1",
-      "id": "18ac9jyokhf2cob7"
+      "title": "Test Note 1",
+      "text": "Test text",
+      "id": "18ac9j8sckhfabmg3"
     },
     {
-      "title": "test2",
-      "text": "test2",
-      "id": "18ac9jyokhf2ctx5"
+      "title": "Test Note 2",
+      "text": "lorem ipsum",
+      "id": "18ac9j8sckhfac1y6"
     }
   ]
 }

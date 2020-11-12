@@ -32,13 +32,25 @@ function validateNote(note) {
 }
 
 function getId(id, notes){
-    const noteId = notes.filter(note => note.id === id);
+    const noteId = notes.filter(note => note.id === id)[0];
     return noteId;
+}
+
+function deleteNote(body, notesArray) {
+    const note = body;
+    const index = notesArray.indexOf(note);
+    notesArray.splice(index, 1);
+    fs.writeFileSync(
+        path.join(__dirname, '../db/db.json'),
+        JSON.stringify({ notes: notesArray }, null, 2)
+    );
+    return note;
 }
 
 module.exports = {
     filterByQuery,
     createNewNote,
     validateNote,
-    getId
+    getId,
+    deleteNote
 };

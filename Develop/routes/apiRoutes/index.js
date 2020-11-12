@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const uniqid = require('uniqid');
 
-const { filterByQuery, createNewNote, validateNote, getId } = require('../../lib/notes');
+const { filterByQuery, createNewNote, validateNote, getId, deleteNote } = require('../../lib/notes');
 const { notes } = require('../../db/db.json');
 
 router.get('/notes', (req, res) => {
@@ -28,14 +28,13 @@ router.post('/notes', (req, res) => {
 
 router.delete('/notes/:id', (req, res) => {
     const note = getId(req.params.id, notes);
-    const id = note.id;
-    console.log(id);
+    const id = req.params.id;
     if (id < 0) {
         res.sendStatus(404)
     }
     res.send(`Got a DELETE request at /notes/${id}`);
-    notes.splice(id, 1);
-    
+    const noNote = deleteNote(note, notes);
+    return noNote;
 });
 
 module.exports = router;
