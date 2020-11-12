@@ -31,8 +31,14 @@ function validateNote(note) {
     return true;
 }
 
+function getId(id, notes){
+    const noteId = notes.filter(note => note.id === id);
+    return noteId;
+}
+
 module.exports = {
     filterByQuery,
     createNewNote,
-    validateNote
+    validateNote,
+    getId
 };

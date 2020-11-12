@@ -1,6 +1,7 @@
 const router = require('express').Router();
+const uniqid = require('uniqid');
 
-const { filterByQuery, createNewNote, validateNote } = require('../../lib/notes');
+const { filterByQuery, createNewNote, validateNote, getId } = require('../../lib/notes');
 const { notes } = require('../../db/db.json');
 
 router.get('/notes', (req, res) => {
@@ -13,7 +14,7 @@ router.get('/notes', (req, res) => {
 
 router.post('/notes', (req, res) => {
     // set id based on next index of array
-    req.body.id = notes.length.toString();
+    req.body.id = uniqid();
 
     // if any data is incorrect, send 400 error
     if (!validateNote(req.body)) {
@@ -25,5 +26,16 @@ router.post('/notes', (req, res) => {
     }
 });
 
+router.delete('/notes/:id', (req, res) => {
+    const note = getId(req.params.id, notes);
+    const id = note.id;
+    console.log(id);
+    if (id < 0) {
+        res.sendStatus(404)
+    }
+    res.send(`Got a DELETE request at /notes/${id}`);
+    notes.splice(id, 1);
+    
+});
 
 module.exports = router;
